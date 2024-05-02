@@ -1,0 +1,610 @@
+$main-color:rgb(33, 118, 245);
+* {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+header {
+    position: relative;
+    height: 55px;
+    background-color: $main-color;
+    box-shadow: 0px 2px 2px black;
+    position: relative;
+    z-index: 1;
+    a {
+        margin-left: 10px;
+        padding-top: 5px;
+        display: inline-block;
+        height: 100%;
+        color: #ffffff;
+        text-decoration: none;
+        h1 {
+            height: 100%;
+            display: inline-block;
+        }
+    }
+    .small__screen__dropdown {
+        position: absolute;
+        right:10px;
+        top:15px;
+        display: inline-block;
+        display: none;
+        input {
+            display: none;
+            height: 100%;
+            width: 100%;
+        }
+        #dropdown {
+            margin-top: 3px;
+        }
+    }
+    ul {
+        margin-right: 10px;
+        padding:0;
+        position: absolute;
+        list-style-type: none;
+        display: inline-block;
+        height: 100%;
+        right: 10px;
+        li {
+            margin: 0;
+            width: fit-content;
+            display: inline-block;
+            font-size: 1.2em;
+            height: 100%;
+            a.header__list__elements {
+                font-weight: 500;
+                text-align: center;
+                width: 100%;
+                padding: 12px;
+                height: 100%;
+                transition: all 100ms linear;
+                &:hover {
+                    cursor: pointer;
+                    color: $main-color;
+                    background-color: #ffffff;
+                }
+            }
+        }
+    }
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    .tabs {
+        &__container {
+            background-color: rgb(255, 255, 255);
+            display: inline-block;
+            width: 20%;
+            min-width: 200px;
+            min-height: 92vh; // a changer
+            height: auto;
+            padding-top: 20px;
+            overflow: auto;
+            white-space: nowrap;
+        }
+        &__list {
+            list-style-type: none;
+            display: inline-block;
+            width: 100%;
+            padding: 0;
+            margin-bottom: 20px;
+            li {
+                margin-bottom: 30px;
+                font-size: 1.25em;
+                width: 100%;
+                display:block;
+                input {
+                    display: none;
+                    &:checked + label {
+                        color:$main-color;
+                        border-right:3px solid $main-color;
+                    }
+                }
+                label {
+                    padding-left: 20px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    padding: 8px;
+                    img {
+                        margin-left: 10px;
+                        margin-right: 25px;
+                    }
+                    #Notifications__counter {
+                        margin-left: 10px;
+                        background-color:rgb(204, 48, 48);
+                        border-radius: 50%;
+                        display: inline-block;
+                        color:white;
+                        width: 25px;
+                        text-align:center;
+                    }
+                    &:hover {
+                        cursor: pointer;
+                        color:$main-color;
+                        & > span {
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+        &__categories {
+            display: block;
+            text-align: center;
+            height: 40px;
+            font-size: 1.5em;
+            color: $main-color;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-shadow: .5px .5px 1px black;
+        }
+        &__trigger {
+            display: none;
+        }
+        &__trigger__image {
+            margin-left: 10px;
+            cursor: pointer;
+            display: none;
+        }
+    }
+    .rooms__container {
+        min-height: 92vh;
+        height: fit-content;
+        width: 80%;
+        position: relative;
+        .abs {
+            min-height: 92vh;
+            height: fit-content;
+            position: absolute;
+            width: 100%;
+            padding: 10px;
+            background-color: rgb(207, 203, 203);
+            h1 {
+                margin-bottom: 20px;
+                display: inline-block;
+                width: fit-content;
+            }
+        }
+    }
+}
+.Living-room__main{
+    display: grid;
+    grid-template:repeat(1,1fr) / repeat(2,1fr);
+    grid-template-areas: 
+    "l f"
+    "t h"
+    "g g"
+    "g g"
+    "g g"
+    "g g"
+}
+.Kitchen__main {
+    display: grid;
+    grid-template:repeat(6,1fr) / 1fr;
+    grid-template-areas:
+        "l"
+        "gs"
+        "g"
+        "g"
+        "g"
+        "g"
+    ;
+}
+.Bathroom__main {
+    display: grid;
+    grid-template:repeat(6,1fr) / 1fr;
+    grid-template-areas: 
+    "l"
+    "w"
+    "g"
+    "g"
+    "g"
+    "g"
+    ;
+}
+.FrontYard__main {
+    display: grid;
+    grid-template: repeat(2,1fr) / repeat(1,1fr);
+    grid-template-areas:
+    "l"
+    "i";
+    &__light {
+        grid-area: l;
+    }
+    &__intrusion {
+        grid-area: i;
+    }
+}
+.Settings__main {
+    display:grid;
+    grid-template: repeat(3,1fr) / repeat(2,1fr);
+    grid-template-areas: 
+    "t t"
+    "n c"
+    "s s";
+    &__temperature {
+        grid-area: t;
+        &__btn {
+            margin: 0px 5px;
+            border: none;
+            width: 85px;
+            height: 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            background-color: $main-color;
+            &:hover {
+                background-color: rgb(0, 100, 250);
+            }
+            &--green {
+                background-color: rgb(5, 175, 5);
+                &:hover {
+                    background-color: rgb(1, 138, 1);
+                }
+            }
+        }
+    }
+    &__email {
+        &Notificaions {
+            grid-area: n;
+        }
+        &Change {
+            grid-area: c;
+            p {
+                font-size: .8em;
+                #notificationsEmail{
+                    font-size: .85em;
+                    color:rgb(0, 0, 255);
+                    font-weight: bold;
+                    a {
+                        font-weight: 600;
+                        text-decoration:none;
+                        color:rgb(85, 85, 216);
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__sms {
+        grid-area: s;
+    }
+    #tempTreshholdInput {
+        border: 1px solid rgb(168, 167, 167);
+        padding: 5px;
+        width: 90px;
+        margin: 0px 20px;
+        background-color: rgb(253, 253, 253);
+        color: black;
+        &:focus {
+            box-shadow: inset 1px 1px 2px black;
+        }
+    }
+}
+.box {
+    background-color: white;
+    box-shadow: 2px 2px 5px black;
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    align-items: center;
+    padding: 10px;
+    margin: 2px;
+    .icon {
+        margin-left: 10px;
+    }
+    p {
+        margin-left: 30px;
+        font-size: 1.25em;
+    }
+    span {
+        font-size: 1.1em;
+    }
+    &.Living-room {
+        &__lights {
+            grid-area: l;
+        }
+        &__fan {
+            grid-area: f;
+        }
+        &__temperature {
+            grid-area: t;
+        }
+        &__humidity {
+            grid-area: h;
+        }
+        &__graphs {
+            grid-area: g;
+            height: auto;
+            canvas {
+                width:100%  !important;
+                height: 320px !important;
+            }
+        }
+    }
+    &.Kitchen {
+        &__lights {
+            grid-area: l;
+        }
+        &__gas {
+            grid-area:gs;
+        }
+        &__graphs {
+            grid-area:g;
+            height: auto;
+            overflow: auto;
+            canvas {
+                width:100%  !important;
+                height: 320px !important;
+            }
+        }
+    }
+    &.Bathroom {
+        &__lights {
+            grid-area: l;
+        }
+        &__water {
+            grid-area: w;
+        }
+        &__graphs {
+            grid-area: g;
+            height: auto;
+            overflow: auto;
+            canvas {
+                width:100%  !important;
+                height: 320px !important;
+            }
+        }
+    }
+}
+.btn {
+    margin-left: auto;
+    margin-right: 10px;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    &__trigger {
+        opacity: 0;
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        &:checked + .btn__circle {
+            background-color: rgb(7, 180, 7);
+            transform: translateX(28px);
+        }
+        &:checked ~ .btn__gauge {
+            background-color: rgb(157, 248, 157);
+        }
+        &:disabled {
+            cursor: default;
+        }
+        &:disabled + .btn__circle {
+            background-color: rgb(107, 107, 107);
+        }
+        &:disabled ~ .btn-gauge {
+            background-color: rgb(168, 168, 168);
+        }
+    }
+    &__circle {
+        z-index: 1;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: -25%;
+        left: -10px;
+        background-color: rgb(33, 118, 245);
+        border-radius: 50%;
+        transition: all 500ms;
+        box-shadow: 2px 1px 3px black;
+    }
+    &__gauge {
+        top:0;
+        position: absolute;
+        left: 0;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        background-color: rgb(209, 209, 209);
+        transition: background-color 300ms linear;
+        box-shadow: inset .25px .25px 2px black;
+    }
+}
+//----------------------------------------------------------------------------------------------------
+.alert {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+    &__box {
+        width:100%;
+        margin-bottom: 5px;
+        padding: 10px;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-weight: 600;
+        &--red {
+            background-color: rgb(243, 103, 103);
+            border:4px solid rgb(175, 11, 11);
+        }
+        &--yellow {
+            background-color: rgb(248, 215, 68);
+            border:4px solid rgb(187, 169, 7);
+        }
+        .x {
+            margin-left: auto;            
+            cursor: pointer;
+        }
+        .warningImg {
+            margin-right: 20px;
+        }
+        span {
+            button {
+                width:fit-content;
+                margin-left: 15px;
+                border: 2px solid white;
+                background-color: $main-color;
+                cursor: pointer;
+                color: white;
+                &:hover {
+                    background-color: rgb(24, 111, 224);
+                }
+            }
+            &.time {
+                font-weight: 600;
+                margin-left: 20px;
+                font-size:.75em;
+            }
+        }
+    }
+
+}
+#Notifications__clear {
+    float: right;
+    width: fit-content;
+    padding: 0 12px;
+    margin-right:20px;
+    margin-top:5px;
+    height:40px;
+    background-color: rgb(255, 0, 0);
+    color: white;
+    border: 0;
+    cursor: pointer;
+    font-size: 1.1em;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    &:hover {
+        background-color: rgb(235, 0, 0);
+    }
+}
+//---------------------------------------------------------------------------------------------------
+@media (max-width:992px) {
+    header {
+        width: 100vw;
+        .small__screen__dropdown {
+            display: inline-block;
+        }
+        ul {
+            position: absolute;
+            left: 0;
+            background-color:rgba(33, 118, 245,.8);
+            display:none;
+            width: 100vw;
+            margin:0;
+            padding: 0;
+            height:fit-content;
+            li {
+                border-bottom: 2px solid white;
+                width: 100%;
+                display: block;
+                a {
+                    margin: 0;
+                    width:100%;
+                    color: white;
+                }
+            }
+        }
+    }
+    .container {
+        flex-direction: column;
+        width:100vw;
+        .tabs__container {
+            .tabs__categories {
+                margin-top: 10px;
+                margin-bottom: 3px;
+            }
+            display: contents;
+            width: 100%;
+            .tabs__list {
+                width:100vw;
+                margin: 0;
+                margin-top: 10px;
+                li {
+                    .header__list__elements {
+                        display: none;
+                    }
+                    label {
+                        b {
+                            font-size: .75em;
+                        }
+                    }
+                }
+            }
+        }
+        .rooms__container {
+            width: 100%;
+            .box {
+                width: 93vw !important;
+                padding-right: 20px;
+                font-size:.7em;
+            }
+            .Living-room__main {
+                display: flex;
+                flex-direction:column;
+            }
+            .FrontYard__main {
+                &__intrusion {
+                    font-size: .8em !important;
+                    h3 {
+                        font-size: 1em;
+                        width: fit-content;
+                    }
+                }
+            }
+        }
+        .Email__main {
+            &__info {
+                font-size: .9em;
+                #emailTriggerText {
+                    font-size: .9em;
+                    width: fit-content !important;
+                }
+            }
+            a.Email__link {
+                width: 80px !important;
+                font-size:.8em !important;
+            }
+        }
+        .alert__container {
+            .alert__box {
+                font-size: .8em;
+                padding:3px 8px;
+                button {
+                    font-size: 0.8em;
+                    margin:2px;
+                }
+                img {
+                    margin-left:3px;
+                }
+            }
+        }
+        .btn {
+            margin-right:0;
+        }
+        .Settings__main {
+            width: 100%;
+            grid-template: repeat(4,1fr) / repeat(1,1fr);
+            grid-template-areas: 
+            "t"
+            "n"
+            "c"
+            "s";
+        }
+    }
+}

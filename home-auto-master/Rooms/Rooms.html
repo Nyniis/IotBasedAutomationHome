@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms</title>
+    <link rel="stylesheet" href="Rooms.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>
+    <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+  apiKey: "AIzaSyAfRq1L3pQckPz9yx8UFVLtM9CtUwoIWQM",
+  authDomain: "smarthome-5a747.firebaseapp.com",
+  databaseURL: "https://smarthome-5a747-default-rtdb.firebaseio.com",
+  projectId: "smarthome-5a747",
+  storageBucket: "smarthome-5a747.appspot.com",
+  messagingSenderId: "437633317343",
+  appId: "1:437633317343:web:52442fb9bebc441732ac6a"
+};
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="Chart.min.js"></script>
+</head>
+<body>
+    <header>
+        <a href="../index.html"><h1>AutoHome</h1></a>
+        <div class="small__screen__dropdown">
+            <input id="menu" type="checkbox" unchecked onclick="smallScreenMenu(this)">
+            <label for="menu"><img id="dropdown" src="image/dropdown.png"></label>
+        </div>
+        <ul class="header__list">
+            <li><a class="header__list__elements" href="../index.html">Home</a></li>
+            <li><a class="header__list__elements" href="../about/about.html">About</a></li>
+        </ul>
+    </header>
+    <div class="container">
+        <div class="tabs__container" id="tabs__container">
+            <span class="tabs__categories"><b><i>Tabs</i></b></span>
+            <ul class="tabs__list">
+                <li>
+                    <input id="Living-room__tab" type="radio" name="tabs" checked onclick="showChecked()">
+                    <label class="tabs__text" for="Living-room__tab"><img src="image/couch.png"><b>Living Room</b></label>                
+                </li>
+                <li>
+                    <input id="Kitchen__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
+                    <label class="tabs__text" for="Kitchen__tab"><img src="image/kitchen.png"><b>Kitchen</b></label>
+                </li>
+                <li>
+                    <input id="Bathroom__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
+                    <label class="tabs__text" for="Bathroom__tab"><img src="image/shower.png"><b>Bathroom</b></label>
+                </li>
+                <li>
+                    <input id="FrontYard__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
+                    <label class="tabs__text" for="FrontYard__tab"><img src="image/yard.png"><b>Front yard</b></label>
+                </li>
+                <li>
+                    <input id="Notifications__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
+                    <label class="tabs__text" for="Notifications__tab"><img src="image/bell.png"><b>Notification</b><span id="Notifications__counter">0</span></label>
+                </li>
+                <li>
+                    <input id="Email__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
+                    <label class="tabs__text" for="Email__tab"><img src="image/Settings.png"><b>Settings</b></label>
+                </li>
+            </ul>
+        </div>
+        <div class="rooms__container" id="rooms__container">
+            <div class="abs" id="Living-room">
+                <h1>Living room</h1>
+                <div class="Living-room__main">
+                    <div class="box Living-room__lights">
+                        <img src="image/lightbulb.png" class="icon"><p>Light status:  &nbsp<h3 id="firebase-Living-room-light"></h3></p>
+                        <div class="btn">
+                            <input id="Living-room-light-trigger" class="btn__trigger" type="checkbox">
+                            <div class="btn__circle"></div>
+                            <div class="btn__gauge"></div>
+                        </div>
+                    </div>
+                    <div class="box Living-room__fan">
+                        <img src="image/fan.png" class="icon"><p>Fan status: &nbsp <h3 id="firebase-Living-room-fan"></h3></p>
+                        <div class="btn">
+                            <input id="Living-room-fan-trigger" class="btn__trigger" type="checkbox">
+                            <div class="btn__circle"></div>
+                            <div class="btn__gauge"></div>
+                        </div>
+                    </div>
+                    <div class="box Living-room__temperature">
+                        <img src="image/temperature.png" class="icon"><p>Temperature: &nbsp<h3 id="firebase-Living-room-temperature">0</h3>&nbsp;&deg;C</p>
+                    </div>
+                    <div class="box Living-room__humidity">
+                        <img src="image/waterdrop.png" class="icon"><p>Humidity:  &nbsp<h3 id="firebase-Living-room-humidity">0</h3>&nbsp;%</p>
+                    </div>
+                    <div class="box Living-room__graphs">
+                        <canvas id="livingRoomGraphs"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="abs" id="Kitchen">
+                <h1>Kitchen</h1>
+                <div class="Kitchen__main">
+                    <div class="box Kitchen__lights">
+                        <img src="image/lightbulb.png" class="icon"><p>Light status:  &nbsp<h3 id="firebase-Kitchen-light"></h3></p>
+                        <div class="btn">
+                            <input id="Kitchen-light-trigger" class="btn__trigger" type="checkbox">
+                            <div class="btn__circle"></div>
+                            <div class="btn__gauge"></div>
+                        </div>
+                    </div>
+                    <div class="box Kitchen__gas">
+                        <img src="image/gas.png" class="icon"><p>Gaz:&nbsp<h3 id="firebase-Kitchen-gas">0</h3>&nbsp;PPM</p>
+                    </div>
+                    <div class="box Kitchen__graphs">
+                        <canvas id="kitchenGraphs"></canvas>
+                    </div> 
+                </div>
+            </div>
+            <div class="abs" id="Bathroom">
+                <h1>Bathroom</h1>
+                <div class="Bathroom__main">
+                    <div class="box Bathroom__lights">
+                        <img src="image/lightbulb.png" class="icon"><p>Light status: &nbsp <h3 id="firebase-Bathroom-light"></h3></p>
+                        <div class="btn">
+                            <input id="Bathroom-light-trigger" class="btn__trigger" type="checkbox">
+                            <div class="btn__circle"></div>
+                            <div class="btn__gauge"></div>
+                        </div>
+                    </div>
+                    <div class="box Bathroom__water">
+                        <img src="image/water.png" class="icon"><p>Water level: &nbsp<h3 id="firebase-Bathroom-water">0</h3></p>
+                    </div>
+                    <div class="box Bathroom__graphs">
+                        <canvas id="bathroomGraphs"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="abs" id="FrontYard">
+                <h1>Front Yard</h1>
+                <div class="FrontYard__main">
+                    <div class="box FrontYard__main__light">
+                        <img src="image/lightbulb.png" class="icon"><p>Light status: &nbsp<h3 id="firebase-frontYard-light"></h3></p>
+                        <div class="btn">
+                            <input id="frontYard-light-trigger" class="btn__trigger" type="checkbox">
+                            <div class="btn__circle"></div>
+                            <div class="btn__gauge"></div>
+                        </div>
+                    </div>
+                    <div class="box FrontYard__main__intrusion">
+                        <img src="image/intrusion.png" class="icon"><p>Intrusion: &nbsp<h3 id="firebase-frontYard-intrusion">Loading...</h3></p>
+                    </div>
+                </div>
+            </div>
+            <div class="abs" id="Notifications">
+                <h1>Notifications</h1>
+                <button id="Notifications__clear" onclick="clearNotifications(this)">Clear all</button>
+                <div class="alert__container">
+                    <div class="alert__box alert__box--red" id="Intrusion__alert">
+                        <img class="warningImg" src="image/warning.png">
+                        <span>Alert! Intrusion detected. The buzzer is on <button class="Buzzer__btn" onclick="turnBuzzerOff(this);">Turn off</button></span>
+                        <span class="time"></span>
+                        <img class="x" src="image/x.png" onclick="closeNotification(this)">                        
+                    </div>
+                    <div class="alert__box alert__box--yellow" id="Temperature__alert">
+                        <img class="warningImg" src="image/warning.png">
+                        <span>Warning! high temperature in the living room. The fan is on</span>
+                        <span class="time"></span>
+                        <img class="x" src="image/x.png" onclick="closeNotification(this)">
+                    </div>
+                    <div class="alert__box alert__box--yellow" id="Humidity__alert">
+                        <img class="warningImg" src="image/warning.png">
+                        <span>Warning! high humidity in the living room.</span>
+                        <span class="time"></span>
+                        <img class="x" src="image/x.png" onclick="closeNotification(this)">                        
+                    </div>
+                    <div class="alert__box alert__box--red" id="Gas__alert">
+                        <img class="warningImg" src="image/warning.png">
+                        <span>Alert! Gaz is too high in the kitchen. The buzzer is on </span>
+                        <span class="time"></span>
+                        <img class="x" src="image/x.png" onclick="closeNotification(this)">
+                    </div>
+                    <div class="alert__box alert__box--red" id="Water__alert">
+                        <img class="warningImg" src="image/warning.png">
+                        <span>Warning! Water level is too high in the bathroom.</span>
+                        <span class="time"></span>
+                        <img class="x" src="image/x.png" onclick="closeNotification(this)">
+                    </div>
+                </div>
+            </div>
+            <div class="abs" id="Settings">
+                <h1>Settings</h1>
+                <div class="Settings__main">
+                    <div class="box Settings__main__temperature" id="st">
+                        <img src="image/tempSetting.png" class="icon">
+                        <p>Temperature threshold: </p>
+                        <input type="number" id="tempTreshholdInput" min="20" max="50" placeholder="Loading..." disabled>
+                        <button class="Settings__main__temperature__btn" id="changeTemperatureTreshhold" type="button" onclick="changeTemperatureTreshhold(this)">Change</button>
+                        <button class="Settings__main__temperature__btn Settings__main__temperature__btn--green" id="confirmChangeTreshhold" onclick="confirmChangeTreshhold(this)">Confirm</button>
+                    </div>
+                    <div class="box Settings__main__emailNotificaions">
+                        <img src="image/emailSetting.png" class="icon"><p>Email notifications</p>
+                        <div class="btn">
+                            <input id="email__notifications__trigger" class="btn__trigger" type="checkbox" onclick="emailNotifications(this)" disabled>
+                            <div class="btn__circle"></div>
+                            <div class="btn__gauge"></div>
+                        </div>
+                    </div>
+                    <div class="box Settings__main__emailChange">
+                        <img src="image/emailNotification.png" class="icon"><p>Your email: <span id="notificationsEmail">Loading... </span></p>
+                    </div>
+                    <div class="box Settings__main__sms">
+                        <img src="image/phoneSetting.png" class="icon"><p>SMS notifications</p>
+                        <div class="btn">
+                            <input id="sms__notifications__trigger" class="btn__trigger" type="checkbox" onclick="smsNotifications(this)">
+                            <div class="btn__circle"></div>
+                            <div class="btn__gauge"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="Rooms.js"></script>
+    <script src="graph.js"></script>
+</body>
+</html>
+
+

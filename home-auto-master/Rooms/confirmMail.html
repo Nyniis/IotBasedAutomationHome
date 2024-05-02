@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Verification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="confirmMail.css"/>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>
+    <script src="confirmMail.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="image">
+            <a class="contribution" href='https://www.freepik.com/free-photos-vectors/background'>Background vector created by freepik - www.freepik.com</a>
+        </div>
+        <div class="main">
+            <form class="box" onsubmit="verifyCode()">
+                <h1>Almost done!</h1>
+                <h4 id="info">Please wait while the confirmation code is being sent to you ...</h4>
+                <p>The target email is: <i id="email"></i></p>
+                <div class="input">
+                    <input id="code" type="number" name="code" autocomplete="off" required min="0" max="9999" placeholder=" ">
+                    <span class="input__placeholder">Enter code</span>
+                </div>
+                <input type="submit" name="" value="Confirm">
+            </form>    
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Get notified in your email</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="email.css"/>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>
+    <script src="email.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="image">
+            <a class="contribution" href='https://www.freepik.com/free-photos-vectors/background'>Background vector created by freepik - www.freepik.com</a>
+        </div>
+        <div class="box">
+            <form>
+                <h1>Get notified in your email</h1>
+                <h2>To inform you of any danger, please type in your email address</h2>
+                <div class="input">
+                    <input id="email" type="email" name="email" required placeholder=" ">
+                    <span class="input__placeholder">Email address</span>
+                </div>
+                <input type="submit" value="Submit" onclick="submitEmail()">
+                <div id="loading"><i>Please wait ...</i></div>
+                <a id="skip" onclick="skipEmail()">Skip email part</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

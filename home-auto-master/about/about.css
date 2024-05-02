@@ -1,0 +1,318 @@
+* {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+    background-image: url();
+    background-repeat: no-repeat;
+    background-color: aliceblue;
+}
+
+
+header {
+  position: relative;
+  height: 70px;
+  padding: 12px;
+}
+
+header a {
+  padding-top: 5px;
+  display: inline-block;
+  height: 100%;
+  color: #000000;
+  text-decoration: none;
+}
+
+header a h1 {
+  height: 100%;
+  display: inline-block;
+}
+
+header a h1:hover{
+    color: #70bcfa;
+}
+
+header ul {
+  position: absolute;
+  list-style-type: none;
+  display: inline-block;
+  height: 100%;
+  right: 10px;
+}
+
+header ul li {
+  margin: 0;
+  width: 100px;
+  display: inline-block;
+  font-size: 1.2em;
+  height: 100%;
+}
+
+header ul li a.header__list__elements {
+  text-align: center;
+  width: 100%;
+  padding-top: 10px;
+  height: 80%;
+}
+
+header ul li a.header__list__elements:hover {
+  color: #70bcfa;
+}
+
+.main {
+    margin: 5px;
+    width: 100%;
+    padding: 40px;
+}
+
+.main p {
+    text-align: center;
+    font-size: 30px;
+    color: #000000;
+}
+
+.main h1{
+    text-align: center;
+    color: #70bcfa;
+}
+
+.main a {
+    text-decoration: none;
+}
+
+.main a.main__button {
+  padding: 25px;
+  text-decoration: none;
+  font-size: 2em;
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 100px;
+  border: 3px solid #70bcfa;
+  color: #70bcfa;
+  margin: 30px auto;
+  -webkit-transition: all 180ms linear;
+  transition: all 180ms linear;
+}
+
+.main a.main__button:hover {
+  background-color: #70bcfa;
+  color: #000000;
+}
+
+.team {
+    margin: 5px;
+    padding: 5px;
+    width:100%;
+}
+
+.team h1 {
+    color: #70bcfa;
+    text-align: left;
+}
+
+.samah {
+    margin: 5px;
+    width: 31%;
+    height: 300px;
+    display: inline-block;
+    border: 2px solid #000000;
+    text-align: center;
+    box-shadow: 10px 10px 5px grey;
+    background-color: #ffffff;
+}
+
+.samah img{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+
+
+.icons {
+    display: inline-block;
+}
+
+.icons img {
+    width: 40px;
+    height: 40px;
+}
+
+.malak {
+    margin: 5px;
+    width: 32%;
+    height: 300px;
+    display: inline-block;
+    border: 2px solid #000000;
+    text-align: center;
+    box-shadow: 10px 10px 5px grey;
+    background-color: #ffffff;
+}
+
+.malak img{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+
+.icons {
+    display: inline-block;
+}
+
+.icons img {
+    width: 40px;
+    height: 40px;
+}
+
+.nesrine{
+    margin: 5px;
+    width: 31%;
+    height: 300px;
+    display: inline-block;
+    border: 2px solid #000000;
+    text-align: center;
+    box-shadow: 10px 10px 5px grey;
+    background-color: #ffffff;
+}
+
+.nesrine img{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+
+.icons {
+    display: inline-block;
+}
+
+.icons img {
+    width: 40px;
+    height: 40px;
+}
+
+.khaled {
+    margin: 25px;
+    width: 45%;
+    height: 300px;
+    display: inline-block;
+    border: 2px solid #000000;
+    text-align: center;
+    box-shadow: 10px 10px 5px grey;
+    background-color: #ffffff;
+}
+
+.khaled img{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+
+.icons {
+    display: inline-block;
+}
+
+.icons img {
+    width: 40px;
+    height: 40px;
+}
+
+.brahim{
+    margin: 25px;
+    width: 45%;
+    height: 300px;
+    display: inline-block;
+    border: 2px solid #000000;
+    text-align: center;
+    box-shadow: 10px 10px 5px grey;
+    background-color: #ffffff;
+}
+
+.brahim img{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+
+.icons {
+    display: inline-block;
+}
+
+.icons img {
+    width: 40px;
+    height: 40px;
+}
+
+
+@media (max-width: 700px) {
+  header {
+    width: 100vw;
+    margin-bottom: 30px;
+  }
+    
+header a h1 {
+    text-align: center;
+    display: block;
+    position: relative;
+}
+    
+header ul {
+    position:relative;
+    display: block;
+    width: 100vw;
+    padding: 10px;
+    text-align: center;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+    
+header ul li {
+    width: 100%;
+    display: block;
+  }
+header ul li a {
+    margin: 0;
+    width: 100%;
+  }
+    
+.team  {
+    margin: 5px;
+    position: relative;
+    display: block;
+        
+}
+    
+.samah{
+    position: relative;
+    display: block;
+    width: 80%;
+    margin-left: 30px;
+}
+
+.malak{
+    display: block;
+    width: 80%;
+    margin-left: 30px;
+    }
+    
+.nesrine{
+    display: block;
+    width: 80%;
+    margin-left: 30px;
+    }
+    
+.khaled{
+    display: block;
+    width: 80%;
+    margin-left: 30px;
+    }
+    
+.brahim{
+    display: block;
+    width: 80%;
+    margin-left: 30px;
+    };
