@@ -29,7 +29,7 @@
 </head>
 <body>
     <header>
-        <a href="../index.html"><h1>AutoHome</h1></a>
+        <a href="../index.html"><h2>SmartHome Dashboard</h2></a>
         <div class="small__screen__dropdown">
             <input id="menu" type="checkbox" unchecked onclick="smallScreenMenu(this)">
             <label for="menu"><img id="dropdown" src="image/dropdown.png"></label>
@@ -41,7 +41,7 @@
     </header>
     <div class="container">
         <div class="tabs__container" id="tabs__container">
-            <span class="tabs__categories"><b><i>Tabs</i></b></span>
+            <span class="tabs__categories"><b><p>Tabs</p></b></span>
             <ul class="tabs__list">
                 <li>
                     <input id="Living-room__tab" type="radio" name="tabs" checked onclick="showChecked()">
@@ -51,9 +51,10 @@
                     <input id="Kitchen__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
                     <label class="tabs__text" for="Kitchen__tab"><img src="image/kitchen.png"><b>Kitchen</b></label>
                 </li>
+                
                 <li>
-                    <input id="Bathroom__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
-                    <label class="tabs__text" for="Bathroom__tab"><img src="image/shower.png"><b>Bathroom</b></label>
+                    <input id="Access__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
+                    <label class="tabs__text" for="Access__tab"><img src="image/door.png" class="door-icon"><b>Door Access</b></label>
                 </li>
                 <li>
                     <input id="FrontYard__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
@@ -119,25 +120,36 @@
                     </div> 
                 </div>
             </div>
-            <div class="abs" id="Bathroom">
-                <h1>Bathroom</h1>
-                <div class="Bathroom__main">
-                    <div class="box Bathroom__lights">
-                        <img src="image/lightbulb.png" class="icon"><p>Light status: &nbsp <h3 id="firebase-Bathroom-light"></h3></p>
-                        <div class="btn">
-                            <input id="Bathroom-light-trigger" class="btn__trigger" type="checkbox">
-                            <div class="btn__circle"></div>
-                            <div class="btn__gauge"></div>
-                        </div>
-                    </div>
-                    <div class="box Bathroom__water">
-                        <img src="image/water.png" class="icon"><p>Water level: &nbsp<h3 id="firebase-Bathroom-water">0</h3></p>
-                    </div>
-                    <div class="box Bathroom__graphs">
-                        <canvas id="bathroomGraphs"></canvas>
+            <div class="abs" id="Access">
+                <h1>Manage Access</h1>
+                <button id="add-access-btn" class="add-btn">Add Access</button>
+                <table id="access-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Tag</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="access-table-body">
+                        
+                    </tbody>
+                </table>
+            
+                <div id="add-access-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Add Access</h2>
+                        <label for="user-name">Name:</label>
+                        <input type="text" id="user-name">
+                        <label for="user-tag">Tag:</label>
+                        <input type="text" id="user-tag">
+                        <button id="submit-access-btn" class="submit-btn">Add</button>
                     </div>
                 </div>
             </div>
+            
+      
             <div class="abs" id="FrontYard">
                 <h1>Front Yard</h1>
                 <div class="FrontYard__main">
@@ -151,6 +163,12 @@
                     </div>
                     <div class="box FrontYard__main__intrusion">
                         <img src="image/intrusion.png" class="icon"><p>Intrusion: &nbsp<h3 id="firebase-frontYard-intrusion">Loading...</h3></p>
+
+                    </div>
+                    <div class="box FrontYard__main__toggle">
+                        <img src="image/intrusion.png" class="icon">
+                        <p>Intrusion Detection:</p>
+                        <button id="toggle-intrusion">Toggle Intrusion Detection</button>
                     </div>
                 </div>
             </div>
@@ -182,14 +200,8 @@
                         <span class="time"></span>
                         <img class="x" src="image/x.png" onclick="closeNotification(this)">
                     </div>
-                    <div class="alert__box alert__box--red" id="Water__alert">
-                        <img class="warningImg" src="image/warning.png">
-                        <span>Warning! Water level is too high in the bathroom.</span>
-                        <span class="time"></span>
-                        <img class="x" src="image/x.png" onclick="closeNotification(this)">
-                    </div>
                 </div>
-            </div>
+             </div>   
             <div class="abs" id="Settings">
                 <h1>Settings</h1>
                 <div class="Settings__main">

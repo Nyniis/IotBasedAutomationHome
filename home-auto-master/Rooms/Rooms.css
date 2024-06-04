@@ -18,7 +18,7 @@ body {
 header {
   position: relative;
   height: 55px;
-  background-color: #2176f5;
+  background-color: #263A4F;
   -webkit-box-shadow: 0px 2px 2px black;
           box-shadow: 0px 2px 2px black;
   position: relative;
@@ -157,6 +157,7 @@ header ul li a.header__list__elements:hover {
 }
 
 .container .tabs__list li label img {
+  
   margin-left: 10px;
   margin-right: 25px;
 }
@@ -185,7 +186,7 @@ header ul li a.header__list__elements:hover {
   text-align: center;
   height: 40px;
   font-size: 1.5em;
-  color: #2176f5;
+  color: black;
   margin-bottom: 30px;
   font-weight: 700;
   text-shadow: .5px .5px 1px black;
@@ -235,7 +236,12 @@ header ul li a.header__list__elements:hover {
   -ms-grid-rows: (1fr)[1];
   -ms-grid-columns: (1fr)[2];
       grid-template: repeat(1, 1fr)/repeat(2, 1fr);
-      grid-template-areas: "l f" "t h" "g g" "g g" "g g" "g g";
+      grid-template-areas: "l f"
+ "t h"
+ "g g"
+ "g g"
+ "g g"
+ "g g";
 }
 
 .Kitchen__main {
@@ -244,7 +250,12 @@ header ul li a.header__list__elements:hover {
   -ms-grid-rows: (1fr)[6];
   -ms-grid-columns: 1fr;
       grid-template: repeat(6, 1fr)/1fr;
-      grid-template-areas: "l" "gs" "g" "g" "g" "g";
+      grid-template-areas: "l"
+ "gs"
+ "g"
+ "g"
+ "g"
+ "g";
 }
 
 .Bathroom__main {
@@ -253,7 +264,12 @@ header ul li a.header__list__elements:hover {
   -ms-grid-rows: (1fr)[6];
   -ms-grid-columns: 1fr;
       grid-template: repeat(6, 1fr)/1fr;
-      grid-template-areas: "l" "w" "g" "g" "g" "g";
+      grid-template-areas: "l"
+ "w"
+ "g"
+ "g"
+ "g"
+ "g";
 }
 
 .FrontYard__main {
@@ -262,7 +278,8 @@ header ul li a.header__list__elements:hover {
   -ms-grid-rows: (1fr)[2];
   -ms-grid-columns: (1fr)[1];
       grid-template: repeat(2, 1fr)/repeat(1, 1fr);
-      grid-template-areas: "l" "i";
+      grid-template-areas: "l"
+ "i";
 }
 
 .FrontYard__main__light {
@@ -283,7 +300,9 @@ header ul li a.header__list__elements:hover {
   -ms-grid-rows: (1fr)[3];
   -ms-grid-columns: (1fr)[2];
       grid-template: repeat(3, 1fr)/repeat(2, 1fr);
-      grid-template-areas: "t t" "n c" "s s";
+      grid-template-areas: "t t"
+ "n c"
+ "s s";
 }
 
 .Settings__main__temperature {
@@ -767,7 +786,176 @@ header ul li a.header__list__elements:hover {
     -ms-grid-rows: (1fr)[4];
     -ms-grid-columns: (1fr)[1];
         grid-template: repeat(4, 1fr)/repeat(1, 1fr);
-        grid-template-areas: "t" "n" "c" "s";
+        grid-template-areas: "t"
+ "n"
+ "c"
+ "s";
   }
 }
 /*# sourceMappingURL=Rooms.css.map */
+
+
+.door-icon{
+  width: 40px;
+  /*margin-left: 12px;
+  margin-right: 20px;*/
+}
+
+
+/*----------------------------------*/
+/*  */
+
+/* Access Section Styling */
+#Access {
+  padding: 20px;
+}
+
+#add-access-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#access-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#access-table th, #access-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#access-table th {
+  background-color: #f2f2f2;
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#submit-access-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.delete-btn {
+  background-color: #ff4d4d; 
+  color: white; 
+  border: none; 
+  padding: 8px 16px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 16px; 
+  margin: 4px 2px; 
+  cursor: pointer; 
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+
+
+/* Intrusion detection button style -----------------------------------------*/
+/* Add this CSS to your existing stylesheet */
+.intrusion-active {
+  color: green;
+}
+
+.intrusion-inactive {
+  color: red;
+}
+
+button#toggle-intrusion.active {
+  background-color: #28a745;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button#toggle-intrusion.active:hover {
+  background-color: #218838;
+}
+
+button#toggle-intrusion.inactive {
+  background-color: #dc3545;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button#toggle-intrusion.inactive:hover {
+  background-color: #c82333;
+}
+
+.FrontYard__main__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.FrontYard__main__toggle p {
+
+  margin-left: 30px;
+    font-size: 1.25em;
+ 
+}
+
+button#toggle-intrusion {
+  margin-left: auto;
+}

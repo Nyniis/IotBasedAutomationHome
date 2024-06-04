@@ -1,6 +1,6 @@
 var livingRoom = document.getElementById('Living-room');
 var kitchen = document.getElementById('Kitchen');
-var bathroom = document.getElementById('Bathroom');
+var Access = document.getElementById('Access');
 var notifications = document.getElementById('Notifications');
 var inputs = document.getElementsByName('tabs');
 var notificationsCounter = document.getElementById('Notifications__counter');
@@ -18,7 +18,7 @@ function showChecked() {
     if(inputs[0].checked) {
         livingRoom.style.display = 'block';
         kitchen.style.display = 'none';
-        bathroom.style.display = 'none';
+        Access.style.display = 'none';
         frontYard.style.display = 'none';
         notifications.style.display = 'none';
         settings.style.display = 'none';
@@ -26,23 +26,25 @@ function showChecked() {
     else if(inputs[1].checked) {
         livingRoom.style.display = 'none';
         kitchen.style.display = 'block';
-        bathroom.style.display = 'none';
+        Access.style.display = 'none';
         frontYard.style.display = 'none';
         notifications.style.display = 'none';
         settings.style.display = 'none';
     }
+    
     else if(inputs[2].checked) {
         livingRoom.style.display = 'none';
         kitchen.style.display = 'none';
-        bathroom.style.display = 'block';
+        Access.style.display = 'block';
         frontYard.style.display = 'none';
         notifications.style.display = 'none';
         settings.style.display = 'none';
     }
+    
     else if(inputs[3].checked) {
         livingRoom.style.display = 'none';
         kitchen.style.display = 'none';
-        bathroom.style.display = 'none';
+        Access.style.display = 'none';
         frontYard.style.display = 'block';
         notifications.style.display = 'none';
         settings.style.display = 'none';
@@ -50,7 +52,7 @@ function showChecked() {
     else if(inputs[4].checked) {
         livingRoom.style.display = 'none';
         kitchen.style.display = 'none';
-        bathroom.style.display = 'none';
+        Access.style.display = 'none';
         frontYard.style.display = 'none';
         notifications.style.display = 'block';
         settings.style.display = 'none';
@@ -60,7 +62,7 @@ function showChecked() {
     else if(inputs[5].checked) {
         livingRoom.style.display = 'none';
         kitchen.style.display = 'none';
-        bathroom.style.display = 'none';
+        Access.style.display = 'none';
         frontYard.style.display = 'none';
         notifications.style.display = 'none';
         settings.style.display = 'block';
@@ -151,25 +153,139 @@ $("#Living-room-fan-trigger").click(function() {
 
 /*********************************************FUNCTION INTRUSION STATUS***********************************
 **********************************************************************************************************/
-
-$(document).ready(function () {
+/*$(document).ready(function () {
     let database = firebase.database();
-    database.ref("/Front yard").on("value", function (snap){
-        Intr = snap.val().Intrusion;
-        if(Intr == 1){
-            $("#firebase-frontYard-intrusion").text(' There is movement');
-        } else { 
-            $("#firebase-frontYard-intrusion").text(' There is no movement'); 
+    let intrusionActive;
+
+    // Function to update the UI based on intrusion status
+    function updateIntrusionStatus(Intr) {
+        if (Intr == 1) {
+            $("#firebase-frontYard-intrusion").text('There is movement');
+        } else {
+            $("#firebase-frontYard-intrusion").text('There is no movement');
+        }
+    }
+
+    // Function to update the toggle button style and content
+    function updateToggleButton() {
+        if (intrusionActive) {
+            $("#toggle-intrusion")
+                .addClass('active')
+                .removeClass('inactive')
+                .text('Intrusion Detection Activated');
+        } else {
+            $("#toggle-intrusion")
+                .addClass('inactive')
+                .removeClass('active')
+                .text('Intrusion Detection Deactivated');
+        }
+    }
+
+    // Listen for changes in the intrusion status
+    database.ref("/Front yard").on("value", function (snap) {
+        let data = snap.val();
+        intrusionActive = data.IntrusionActive;
+        
+        updateToggleButton();
+
+        if (intrusionActive) {
+            let Intr = data.intrusion;
+            updateIntrusionStatus(Intr);
+            $("#firebase-frontYard-intrusion").addClass('intrusion-active').removeClass('intrusion-inactive');
+        } else {
+            $("#firebase-frontYard-intrusion").text('Intrusion detection is off');
+            $("#firebase-frontYard-intrusion").addClass('intrusion-inactive').removeClass('intrusion-active');
         }
     });
+
+    // Toggle button click handler
+    $("#toggle-intrusion").click(function () {
+        let newStatus = !intrusionActive; // Toggle the current status
+        database.ref("/Front yard").update({
+            IntrusionActive: newStatus
+        });
+    });
+});*/
+$(document).ready(function () {
+    let database = firebase.database();
+    let intrusion = document.getElementById('firebase-frontYard-intrusion');
+    let intrusionAlert = document.getElementById('Intrusion__alert');
+    
+
+    // Function to check for notifications
+    function checkForNotifications() {
+        let date = new Date();
+      
+        if (intrusion.innerHTML.trim() === 'There is movement') {
+            console.log("Condition met: Displaying intrusion alert");
+            if (intrusionAlert.style.display === 'none') nc++;
+            intrusionAlert.style.display = 'block';  
+            intrusionAlert.children[2].textContent = date.toUTCString();
+          
+        }
+    }
+
+    let intrusionActive;
+
+    // Function to update the UI based on intrusion status
+    function updateIntrusionStatus(Intr) {
+        if (Intr == 1) {
+            $("#firebase-frontYard-intrusion").text('There is movement');
+            checkForNotifications();
+        } else {
+            $("#firebase-frontYard-intrusion").text('There is no movement');
+        }
+    }
+
+    // Function to update the toggle button style and content
+    function updateToggleButton() {
+        if (intrusionActive) {
+            $("#toggle-intrusion")
+                .addClass('active')
+                .removeClass('inactive')
+                .text('Intrusion Detection Activated');
+        } else {
+            $("#toggle-intrusion")
+                .addClass('inactive')
+                .removeClass('active')
+                .text('Intrusion Detection Deactivated');
+        }
+    }
+
+    // Listen for changes in the intrusion status
+    database.ref("/Front yard").on("value", function (snap) {
+        let data = snap.val();
+        intrusionActive = data.IntrusionActive;
+        
+        updateToggleButton();
+
+        if (intrusionActive) {
+            let Intr = data.intrusion;
+            updateIntrusionStatus(Intr);
+            $("#firebase-frontYard-intrusion").addClass('intrusion-active').removeClass('intrusion-inactive');
+        } else {
+            $("#firebase-frontYard-intrusion").text('Intrusion detection is off');
+            $("#firebase-frontYard-intrusion").addClass('intrusion-inactive').removeClass('intrusion-active');
+        }
+    });
+
+    // Toggle button click handler
+    $("#toggle-intrusion").click(function () {
+        let newStatus = !intrusionActive; // Toggle the current status
+        database.ref("/Front yard").update({
+            IntrusionActive: newStatus
+        });
+    });
 });
+
+
 
 
 /************************************** FUNCTION LED STATUS FOR BATHROOM ******************************************
 ****************************************************************************************************************/
 
 
-$(document).ready(function () {
+/*$(document).ready(function () {
     var database = firebase.database();
     var LED_STATUS;
     database.ref("/Bathroom").on("value", function (snap){
@@ -193,15 +309,8 @@ $("#Bathroom-light-trigger").click(function() {
     }
 });
 });
+*/
 
-
-/****************************************** FUNCTION GETTING level-water FOR BATHROOM****************************************
-*****************************************************************************************************************/
-
-
-var water = document.getElementById('firebase-Bathroom-water');
-var dbRef = firebase.database().ref("/Bathroom").child('Water');
-dbRef.on('value', snap => water.innerText = snap.val()); 
 
 
 /****************************************** FUNCTION GETTING LED STATUS FOR KITCHEN *********************************
@@ -269,19 +378,21 @@ function checkForNotifications() {
     let temperature = document.getElementById('firebase-Living-room-temperature');
     let humidity = document.getElementById('firebase-Living-room-humidity');
     let gas = document.getElementById('firebase-Kitchen-gas');
-    let water = document.getElementById('firebase-Bathroom-water');
+    //let water = document.getElementById('firebase-Bathroom-water');
     let intrusionAlert = document.getElementById('Intrusion__alert');
     let temperatureAlert = document.getElementById('Temperature__alert');
     let humidityAlert =  document.getElementById('Humidity__alert');
     let gasAlert = document.getElementById('Gas__alert');
-    let waterAlert = document.getElementById('Water__alert');
+    //let waterAlert = document.getElementById('Water__alert');
+    console.log("Intrusion innerHTML:", intrusion.innerHTML.trim());
+console.log("Intrusion alert display:", intrusionAlert.style.display);
     let date = new Date();
-    if(intrusion.innerHTML == ' There is movement') {
+   /* if(intrusion.innerHTML == ' There is movement') {
         if(intrusionAlert.style.display == 'none') nc++;
-        intrusionAlert.style = '';
+        intrusionAlert.style = 'block';
         intrusionAlert.children[2].textContent = date.toUTCString();
-        firebase.database().ref('/Living Room').update({Buzzer:1});
-    }
+      //  firebase.database().ref('/Living Room').update({Buzzer:1});
+    }*/
     if(Number(temperature.innerText)>document.getElementById('tempTreshholdInput').value) {
         if(temperatureAlert.style.display == 'none') nc++;
         temperatureAlert.style = '';
@@ -311,11 +422,12 @@ function checkForNotifications() {
         gasAlert.children[2].textContent = date.toUTCString();
         firebase.database().ref('/Living Room').update({Buzzer:1});
     }
+    /*
     if(Number(water.innerText)>30) {
         if(waterAlert.style.display == 'none') nc++;
         waterAlert.style = '';
         waterAlert.children[2].textContent = date.toUTCString();
-    }
+    }*/
     notificationsCounter.innerHTML = nc;
     showChecked();
 }
@@ -414,3 +526,95 @@ function smallScreenMenu(checkbox) {
     }
 }
 let id = setInterval(checkForNotifications,5000);
+
+////////////////////////
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const addAccessBtn = document.getElementById('add-access-btn');
+    const modal = document.getElementById('add-access-modal');
+    const closeModal = document.getElementsByClassName('close')[0];
+    const submitAccessBtn = document.getElementById('submit-access-btn');
+    const userNameInput = document.getElementById('user-name');
+    const userTagInput = document.getElementById('user-tag');
+    const accessTableBody = document.getElementById('access-table-body');
+
+    // Open modal
+    addAccessBtn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Close modal
+    closeModal.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Add access
+    submitAccessBtn.onclick = function() {
+        const name = userNameInput.value.trim();
+        const tag = userTagInput.value.trim();
+
+        if (name && tag) {
+            const newUserRef = firebase.database().ref('Access').push();
+            newUserRef.set({
+                name: name,
+                tag: tag
+            });
+
+            userNameInput.value = '';
+            userTagInput.value = '';
+            modal.style.display = "none";
+        } else {
+            alert('Please enter both name and tag.');
+        }
+    }
+
+    // Fetch and display users
+    const accessRef = firebase.database().ref('Access');
+    accessRef.on('value', function(snapshot) {
+        accessTableBody.innerHTML = '';
+        snapshot.forEach(function(childSnapshot) {
+            const user = childSnapshot.val();
+            const row = document.createElement('tr');
+            const nameCell = document.createElement('td');
+            const tagCell = document.createElement('td');
+            const deleteCell = document.createElement('td');
+            const deleteButton = document.createElement('button');
+
+            nameCell.textContent = user.name;
+            tagCell.textContent = user.tag;
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('delete-btn');
+            deleteButton.setAttribute('data-id', childSnapshot.key);
+
+            deleteButton.onclick = function() {
+                const userId = this.getAttribute('data-id');
+                if (confirm('Are you sure you want to delete this user?')) {
+                    firebase.database().ref('Access/' + userId).remove()
+                        .then(() => {
+                            console.log('User deleted successfully');
+                        })
+                        .catch((error) => {
+                            console.error('Error deleting user:', error);
+                        });
+                }
+            };
+
+            deleteCell.appendChild(deleteButton);
+            row.appendChild(nameCell);
+            row.appendChild(tagCell);
+            row.appendChild(deleteCell);
+            accessTableBody.appendChild(row);
+        });
+    });
+});
+
+
+
+
