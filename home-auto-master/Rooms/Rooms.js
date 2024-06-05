@@ -115,7 +115,7 @@ dbRef.on('value', snap => temperature.innerText = snap.val());
 /* **************************************FUNCTION GETTING HUMIDITY FOR LIVING ROOM*********************************************/
 
 var humidite = document.getElementById('firebase-Living-room-humidity');
-var dbRef = firebase.database().ref("/Living Room").child('humidity');
+var dbRef = firebase.database().ref("/Living Room").child('humidite');
 dbRef.on('value', snap => humidite.innerText = snap.val()); 
 
 
@@ -373,7 +373,9 @@ dbRef.on('value', snap => gaz.innerText = snap.val());
 function closeNotification(ximg) {
     ximg.parentElement.style.display = 'none';
 }
+
 function checkForNotifications() {
+   
     let intrusion = document.getElementById('firebase-frontYard-intrusion');
     let temperature = document.getElementById('firebase-Living-room-temperature');
     let humidity = document.getElementById('firebase-Living-room-humidity');
@@ -384,8 +386,8 @@ function checkForNotifications() {
     let humidityAlert =  document.getElementById('Humidity__alert');
     let gasAlert = document.getElementById('Gas__alert');
     //let waterAlert = document.getElementById('Water__alert');
-    console.log("Intrusion innerHTML:", intrusion.innerHTML.trim());
-console.log("Intrusion alert display:", intrusionAlert.style.display);
+   // console.log("Intrusion innerHTML:", intrusion.innerHTML.trim());
+    //console.log("Intrusion alert display:", intrusionAlert.style.display);
     let date = new Date();
    /* if(intrusion.innerHTML == ' There is movement') {
         if(intrusionAlert.style.display == 'none') nc++;
@@ -395,7 +397,7 @@ console.log("Intrusion alert display:", intrusionAlert.style.display);
     }*/
     if(Number(temperature.innerText)>document.getElementById('tempTreshholdInput').value) {
         if(temperatureAlert.style.display == 'none') nc++;
-        temperatureAlert.style = '';
+        temperatureAlert.style = 'block';
         document.getElementById('Living-room-fan-trigger').checked = true;
         temperatureAlert.children[2].textContent = date.toUTCString();
         $(document).ready(function () {
@@ -413,12 +415,12 @@ console.log("Intrusion alert display:", intrusionAlert.style.display);
     }
     if(Number(humidity.innerText)>30) {
         if(humidityAlert.style.display == 'none') nc++;
-        humidityAlert.style = '';
+        humidityAlert.style = 'block';
         humidityAlert.children[2].textContent = date.toUTCString();
     }
     if(Number(gas.innerText)>500) {
         if(gasAlert.style.display == 'none') nc++;
-        gasAlert.style = '';
+        gasAlert.style = 'block';
         gasAlert.children[2].textContent = date.toUTCString();
         firebase.database().ref('/Living Room').update({Buzzer:1});
     }
