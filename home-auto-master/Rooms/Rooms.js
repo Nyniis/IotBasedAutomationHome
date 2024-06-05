@@ -6,6 +6,7 @@ var inputs = document.getElementsByName('tabs');
 var notificationsCounter = document.getElementById('Notifications__counter');
 var settings = document.getElementById('Settings');
 var frontYard = document.getElementById('FrontYard');
+var bathroom = document.getElementById('Bathroom');
 var nc = 0;
 var email;
 var ref = firebase.database().ref('/');
@@ -22,6 +23,7 @@ function showChecked() {
         frontYard.style.display = 'none';
         notifications.style.display = 'none';
         settings.style.display = 'none';
+        bathroom.style.display = 'none';
     }
     else if(inputs[1].checked) {
         livingRoom.style.display = 'none';
@@ -30,6 +32,7 @@ function showChecked() {
         frontYard.style.display = 'none';
         notifications.style.display = 'none';
         settings.style.display = 'none';
+        bathroom.style.display = 'none';
     }
     
     else if(inputs[2].checked) {
@@ -39,29 +42,42 @@ function showChecked() {
         frontYard.style.display = 'none';
         notifications.style.display = 'none';
         settings.style.display = 'none';
+        bathroom.style.display = 'none';
     }
     
     else if(inputs[3].checked) {
         livingRoom.style.display = 'none';
         kitchen.style.display = 'none';
         Access.style.display = 'none';
+        frontYard.style.display = 'none';
+        notifications.style.display = 'none';
+        settings.style.display = 'none';
+        bathroom.style.display = 'block';
+    }
+    else if(inputs[4].checked) {
+        livingRoom.style.display = 'none';
+        kitchen.style.display = 'none';
+        Access.style.display = 'none';
         frontYard.style.display = 'block';
         notifications.style.display = 'none';
         settings.style.display = 'none';
+        notificationsCounter.style.display = 'none';
+        bathroom.style.display = 'none';
+        nc = 0;
     }
-    else if(inputs[4].checked) {
+    else if(inputs[5].checked) {
         livingRoom.style.display = 'none';
         kitchen.style.display = 'none';
         Access.style.display = 'none';
         frontYard.style.display = 'none';
         notifications.style.display = 'block';
         settings.style.display = 'none';
-        notificationsCounter.style.display = 'none';
-        nc = 0;
+        bathroom.style.display = 'none';
     }
-    else if(inputs[5].checked) {
+    else if(inputs[6].checked) {
         livingRoom.style.display = 'none';
         kitchen.style.display = 'none';
+        bathroom.style.display = 'none';
         Access.style.display = 'none';
         frontYard.style.display = 'none';
         notifications.style.display = 'none';
@@ -285,7 +301,7 @@ $(document).ready(function () {
 ****************************************************************************************************************/
 
 
-/*$(document).ready(function () {
+$(document).ready(function () {
     var database = firebase.database();
     var LED_STATUS;
     database.ref("/Bathroom").on("value", function (snap){
@@ -309,7 +325,7 @@ $("#Bathroom-light-trigger").click(function() {
     }
 });
 });
-*/
+
 
 
 

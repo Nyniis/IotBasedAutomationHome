@@ -57,6 +57,10 @@
                     <label class="tabs__text" for="Access__tab"><img src="image/door.png" class="door-icon"><b>Door Access</b></label>
                 </li>
                 <li>
+                    <input id="Bathroom__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
+                    <label class="tabs__text" for="Bathroom__tab"><img src="image/shower.png"><b>Bathroom</b></label>
+                </li>
+                <li>
                     <input id="FrontYard__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
                     <label class="tabs__text" for="FrontYard__tab"><img src="image/yard.png"><b>Front yard</b></label>
                 </li>
@@ -68,6 +72,7 @@
                     <input id="Email__tab" type="radio" name="tabs" unchecked onclick="showChecked()">
                     <label class="tabs__text" for="Email__tab"><img src="image/Settings.png"><b>Settings</b></label>
                 </li>
+               
             </ul>
         </div>
         <div class="rooms__container" id="rooms__container">
@@ -148,7 +153,20 @@
                     </div>
                 </div>
             </div>
-            
+            <div class="abs" id="Bathroom">
+                <h1>Bathroom</h1>
+                <div class="Bathroom__main">
+                    <div class="box Bathroom__lights">
+                        <img src="image/lightbulb.png" class="icon"><p>Light status: &nbsp <h3 id="firebase-Bathroom-light"></h3></p>
+                        <div class="btn">
+                            <input id="Bathroom-light-trigger" class="btn__trigger" type="checkbox">
+                            <div class="btn__circle"></div>
+                            <div class="btn__gauge"></div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
       
             <div class="abs" id="FrontYard">
                 <h1>Front Yard</h1>
@@ -212,6 +230,7 @@
                         <button class="Settings__main__temperature__btn" id="changeTemperatureTreshhold" type="button" onclick="changeTemperatureTreshhold(this)">Change</button>
                         <button class="Settings__main__temperature__btn Settings__main__temperature__btn--green" id="confirmChangeTreshhold" onclick="confirmChangeTreshhold(this)">Confirm</button>
                     </div>
+                    <!--
                     <div class="box Settings__main__emailNotificaions">
                         <img src="image/emailSetting.png" class="icon"><p>Email notifications</p>
                         <div class="btn">
@@ -230,9 +249,11 @@
                             <div class="btn__circle"></div>
                             <div class="btn__gauge"></div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
+                
             </div>
+       
         </div>
     </div>
     <script src="Rooms.js"></script>
