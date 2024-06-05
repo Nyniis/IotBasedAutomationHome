@@ -584,7 +584,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 name: name,
                 tag: tag
             });
-
+            firebase.database().ref('AuthorizedTags').child(name).set(tag);
             userNameInput.value = '';
             userTagInput.value = '';
             modal.style.display = "none";
@@ -615,6 +615,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const userId = this.getAttribute('data-id');
                 if (confirm('Are you sure you want to delete this user?')) {
                     firebase.database().ref('Access/' + userId).remove()
+                    firebase.database().ref('AuthorizedTags/' + user.name).remove()
                         .then(() => {
                             console.log('User deleted successfully');
                         })
