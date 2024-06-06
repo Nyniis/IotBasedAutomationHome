@@ -1,40 +1,46 @@
 var livingRoomGraphs = document.getElementById("livingRoomGraphs");
 var kitchenGraphs = document.getElementById("kitchenGraphs");
-var bathroomGraphs = document.getElementById("bathroomGraphs");
+
+
 var s = 0;
 var xAxis = ["0s"];
 var lrtData = [];
 var lrhData = [];
 var kgData = [];
 var bwData = [];
+
 var lrgtData = {
-  label: "Living room temperature(°C)",
+  label: "Living room temperature (°C)",
   data: lrtData,
-  fill:false,
-  borderColor:'red'
+  fill: false,
+  borderColor: 'red'
 };
+
 var lrghData = {
-  label : "Living room humidity (%)",
-  data:lrhData,
-  fill:false,
-  borderColor:'cyan'
+  label: "Living room humidity (%)",
+  data: lrhData,
+  fill: false,
+  borderColor: 'cyan'
 };
+
 var kData = {
-  labels:xAxis,
+  labels: xAxis,
   datasets: [{
-    label:"Kitchen gas (ppm)",
-    data:kgData,
-    borderColor:"orange",
+    label: "Kitchen gas (ppm)",
+    data: kgData,
+    borderColor: "orange",
   }]
-}
+};
+
 var bData = {
-  labels:xAxis,
+  labels: xAxis,
   datasets: [{
-    label:"Bathroom water level(mm)",
-    data:bwData,
-    borderColor:'blue'
+    label: "Bathroom water level (mm)",
+    data: bwData,
+    borderColor: 'blue'
   }]
-}
+};
+
 var chartOptions = {
   legend: {
     display: true,
@@ -44,65 +50,57 @@ var chartOptions = {
       fontColor: 'black'
     }
   },
-  responsive:true,
-  maintainAspectRatio:false,
-  animation : {
-    duration:0
+  responsive: true,
+  maintainAspectRatio: false,
+  animation: {
+    duration: 0
   }
 };
+
 var lrData = {
   labels: xAxis,
-  datasets:[lrgtData,lrghData]
-}
-var lrCharts = new Chart(livingRoomGraphs,{
-  type:'line',
-  data:lrData,
-  options:chartOptions
+  datasets: [lrgtData, lrghData]
+};
+
+var lrCharts = new Chart(livingRoomGraphs, {
+  type: 'line',
+  data: lrData,
+  options: chartOptions
 });
-var kCharts = new Chart(kitchenGraphs,{
-  type:'line',
-  data:kData,
-  options:chartOptions
+
+var kCharts = new Chart(kitchenGraphs, {
+  type: 'line',
+  data: kData,
+  options: chartOptions
 });
-var bCharts = new Chart(bathroomGraphs,{
-  type:'line',
-  data:bData,
-  options:chartOptions
-});
+
+
+
 function updateCharts() {
   let lrRef = firebase.database().ref('Living Room');
   let kRef = firebase.database().ref('Kitchen');
-  let bRef = firebase.database().ref('Bathroom');
-  s+=5;
+ // let bRef = firebase.database().ref('Bathroom');
+  
+  s += 5;
   xAxis.push(s.toString() + "s");
-  lrRef.on('value',function(snapshot){
+  
+  lrRef.once('value', function(snapshot) {
     let temp = snapshot.val().temperature;
-    let humid = snapshot.val().humidity;
+    let humid = snapshot.val().humidite;
+    console.log('get data from data base');
+    console.log(temp);
     lrtData.push(temp);
     lrhData.push(humid);
-    lrCharts = new Chart(livingRoomGraphs,{
-      type:'line',
-      data:lrData,
-      options:chartOptions
-    })
+    lrCharts.update();
   });
-  kRef.on('value',function(snapshot){
+  
+  kRef.once('value', function(snapshot) {
     let gas = snapshot.val().gaz;
     kgData.push(gas);
-    kCharts = new Chart(kitchenGraphs,{
-      type:'line',
-      data:kData,
-      options:chartOptions
-    })
+    kCharts.update();
   });
-  bRef.on('value',function(snapshot){
-    let water = snapshot.val().Water;
-    bwData.push(water);
-    bCharts = new Chart(bathroomGraphs,{
-      type:'line',
-      data:bData,
-      options:chartOptions
-    })
-  });
+  
+ 
 }
-let i = setInterval(updateCharts,10000);
+
+let i = setInterval(updateCharts, 10000);
