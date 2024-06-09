@@ -505,7 +505,7 @@ function changeTemperatureTreshhold(button) {
 function confirmChangeTreshhold(button) {
     button.style.display = 'none';
     document.getElementById('changeTemperatureTreshhold').style = '';
-    let n = document.getElementById('tempTreshholdInput').value;
+    let n = parseInt(document.getElementById('tempTreshholdInput').value, 10);
     document.getElementById('tempTreshholdInput').disabled = true;
     if(n>50) {
         document.getElementById('tempTreshholdInput').value = 50;
